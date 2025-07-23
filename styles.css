@@ -588,7 +588,6 @@ html.azul {
     #lista-gastos-dividir li,
     #lista-gastos-pessoais li {
         flex-direction: column;
-        /* Começamos empilhando tudo */
         align-items: flex-start;
         /* Alinha o conteúdo à esquerda */
         margin-bottom: 12px;
@@ -616,17 +615,30 @@ html.azul {
     .gasto-info-linha span:first-child { /* Descrição */
         font-size: 1.1em;
         font-weight: 700;
-        flex-grow: 0; /* Permite que a descrição cresça */
+        flex-grow: 1; /* PERMITE QUE A DESCRIÇÃO CRESÇA E OCUPE O ESPAÇO RESTANTE */
+        flex-shrink: 1; /* Permite que encolha um pouco se necessário */
+        flex-basis: auto; /* Deixa o elemento decidir sua largura inicial com base no conteúdo */
+        white-space: normal; /* Garante que o texto quebre normalmente */
+        overflow-wrap: break-word; /* Outra garantia de quebra de palavra */
     }
 
     .gasto-info-linha span:nth-child(2) { /* Valor */
         font-size: 1.2em;
-        flex-shrink: 0; /* Impede o valor de encolher */
+        flex-grow: 0; /* Não cresce desnecessariamente */
+        flex-shrink: 0; /* NÃO encolhe, mantendo o valor legível */
+        flex-basis: auto; /* IMPORTANTE: Deixa o elemento decidir sua largura inicial */
+        text-align: right;
+        min-width: 70px; /* Garante uma largura mínima para o valor */
     }
 
     .gasto-info-linha span:nth-child(3) { /* Data */
         font-weight: 500;
-        flex-shrink: 0; /* Impede a data de encolher */
+        font-size: 0.88em; /* Mantenha o tamanho para mobile */
+        flex-grow: 0; /* Não cresce */
+        flex-shrink: 0; /* NÃO encolhe */
+        flex-basis: auto; /* IMPORTANTE: Deixa o elemento decidir sua largura inicial */
+        text-align: right;
+        min-width: 80px; /* Garante uma largura mínima para a data */
     }
 
     /* Ações (botões) em uma linha separada e centralizados */
