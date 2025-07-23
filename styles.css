@@ -1,0 +1,443 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* Reset básico para garantir consistência entre navegadores.
+O seletor universal (*) aplica estilos a todos os elementos HTML. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    /* 100vh: vh significa "viewport height", ou seja, 100% da altura visível da janela do navegador. */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    /* transition: Cria uma animação suave para as propriedades especificadas quando elas mudam de valor.
+    0.3s ease: A animação durará 0.3 segundos e usará uma função de temporização "ease" (começa devagar, acelera no meio, termina devagar). */
+    padding: 20px;
+    line-height: 1.6; /* Melhorar legibilidade do texto */
+}
+
+.main {
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: center; /* Espaçamento entre as duas colunas */
+    gap: 30px; /* Espaçamento entre as colunas */
+
+    flex-wrap: wrap; /* Permite que as colunas quebrem para a próxima linha em telas menores */
+}
+
+.left-column-cards,
+.right-column-cards {
+    flex: 1; /* Permite que esta coluna cresça */
+    max-width: calc(50% - 25px);
+    display: flex;
+    flex-direction: column; /* Empilha os cards dentro desta coluna */
+    gap: 20px; /* Espaçamento entre os cards "Adicionar Gasto" e "Resumo do Mês" */
+    justify-content: flex-start;
+}
+
+.card {
+    background-color: var(--card-background-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--card-border-color);
+    /* Largura automática, controlada pelo grid */
+    width: 100%;
+    display: flex;
+    /* Para flexibilizar o conteúdo interno do card */
+    flex-direction: column;
+    /*Impede que o card encolha mais do que seu conteúdo permite --- */
+    flex-shrink: 0; 
+    /*Permite que o card cresça para preencher espaço, mas não que se estique infinitamente*/
+    flex-grow: 0; /* Permite que os cards cresçam para preencher o espaço disponível */
+}
+.separator {
+    border: none;
+    border-top: var(--subtle-border);
+    margin: 25px 0;
+}
+
+/* Estilo para a área de anotações (textarea) */
+.campo-anotacoes {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 6px;
+    font-size: 1em;
+    background-color: var(--input-background-color);
+    color: var(--input-text-color);
+    resize: vertical; /* Permite redimensionamento apenas na vertical */
+    min-height: 80px; /* Altura mínima para o campo de anotações */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: 'Montserrat', sans-serif; /* Garante a mesma fonte do body */
+}
+
+.campo-anotacoes:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+#lista-gastos-dividir,
+#lista-gastos-pessoais {
+    max-height: 250px; /* Altura máxima da lista antes de rolar - ajuste este valor! */
+    overflow-y: auto; /* Adiciona barra de rolagem vertical quando o conteúdo excede max-height */
+    list-style: none; /* Garante que não haja marcadores de lista */
+    padding-right: 10px; /* Espaço para a barra de rolagem não sobrepor o conteúdo */
+    flex-grow: 1; /* Permite que a lista preencha o espaço disponível dentro do seu card */
+}
+
+h1 {
+    text-align: center;
+    color: var(--header-text-color);
+    margin-bottom: 25px;
+    font-size: 2.8em;
+    font-weight: 700;
+}
+
+h2 {
+    color: var(--header-text-color);
+    margin-bottom: 20px;
+    font-size: 1.9em;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 12px;
+}
+
+.header {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 25px 0;
+    background-color: var(--card-background-color);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--card-border-color);
+}
+
+.temas {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.bt-tema {
+    padding: 10px 18px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 6px;
+    background-color: var(--button-default-bg);
+    color: var(--button-default-text);
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.bt-tema:hover {
+    background-color: var(--button-default-hover-bg);
+    transform: translateY(-2px); /*Efeito sutil de levantar*/
+}
+
+.bt-tema.active {
+    /* .active: Uma classe que será adicionada/removida via JavaScript. */
+    background-color: var(--button-active-bg);
+    color: var(--button-active-text);
+    border-color: var(--button-active-bg);
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3); /* Sombra para botão ativo */
+    transform: translateY(-1px); /* Mantém um pouco do efeito de levantamento */
+}
+
+/*Variáveis CSS para Temas*/
+html {
+     --primary-color: #28a745; /* Verde corporativo - para acentos e sucesso */
+    --secondary-color: #007bff; /* Azul para botões e interatividade */
+    --background-color: #f8f9fa; /* Branco/cinza muito claro para o fundo geral */
+    --text-color: #343a40; /* Cinza escuro para texto principal */
+    --header-text-color: #212529; /* Preto para títulos maiores */
+    --card-background-color: #ffffff; /* Branco puro para o fundo dos cards */
+    --card-border-color: #e9ecef; /* Cinza claro para bordas de card */
+    --input-background-color: #ffffff;
+    --input-border-color: #ced4da;
+    --input-text-color: #495057;
+    --button-default-bg: #6c757d; /* Cinza para botões secundários */
+    --button-default-text: #ffffff;
+    --button-default-hover-bg: #5a6268;
+    --button-active-bg: var(--secondary-color); /* Azul para botões ativos/principais */
+    --button-active-text: #ffffff;
+    --button-hover-brightness: 110%; /* Brilho para hover em botões */
+    --danger-color: #dc3545; /* Vermelho para ações perigosas */
+    --success-light-bg: #d4edda; /* Fundo verde claro para item de gasto dividível */
+    --success-border: #28a745; /* Borda verde para item de gasto dividível */
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra mais elegante */
+    --subtle-border: 1px dashed #dee2e6; /* Linha divisória sutil */
+}
+
+html.escuro {
+    --primary-color: #2fb35e; /* Verde um pouco mais claro para escuro */
+    --secondary-color: #0099ff; /* Azul um pouco mais claro para escuro */
+    --background-color: #212529; /* Preto/cinza muito escuro para o fundo geral */
+    --text-color: #e9ecef; /* Cinza claro para texto principal */
+    --header-text-color: #ffffff; /* Branco para títulos maiores */
+    --card-background-color: #343a40; /* Cinza escuro para o fundo dos cards */
+    --card-border-color: #495057; /* Cinza mais escuro para bordas de card */
+    --input-background-color: #495057;
+    --input-border-color: #6c757d;
+    --input-text-color: #e9ecef;
+    --button-default-bg: #8c97a2; /* Cinza mais claro para escuro */
+    --button-default-text: #212529;
+    --button-default-hover-bg: #7b858e;
+    --button-active-bg: var(--secondary-color);
+    --button-active-text: #ffffff;
+    --danger-color: #ff6b7a; /* Vermelho mais suave para escuro */
+    --success-light-bg: #3d5c41;
+    --success-border: #2fb35e;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    --subtle-border: 1px dashed #495057;
+}
+
+html.azul {
+    --primary-color: #0d47a1; /* Azul escuro principal */
+    --secondary-color: #1976d2; /* Azul médio para acentos */
+    --background-color: #e3f2fd; /* Azul muito claro para fundo geral */
+    --text-color: #263238; /* Cinza escuro azulado */
+    --header-text-color: #0d47a1; /* Azul escuro para títulos */
+    --card-background-color: #ffffff;
+    --card-border-color: #bbdefb;
+    --input-background-color: #ffffff;
+    --input-border-color: #90caf9;
+    --input-text-color: #212121;
+    --button-default-bg: #42a5f5; /* Azul médio para botões secundários */
+    --button-default-text: #ffffff;
+    --button-default-hover-bg: #3c9cdc;
+    --button-active-bg: var(--primary-color);
+    --button-active-text: #ffffff;
+    --danger-color: #ef5350; /* Vermelho para ações perigosas */
+    --success-light-bg: #e8f5e9; /* Verde para gastável */
+    --success-border: #4caf50;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --subtle-border: 1px dashed #c1d6e8;
+}
+
+.form-grupo {
+    margin-bottom: 20px;
+}
+
+.form-grupo label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* Seletores de atributo (input[type="text"]) que aplicam estilos a campos de entrada específicos e ao elemento select. */
+.form-grupo input[type="text"],
+.form-grupo input[type="number"],
+.form-grupo input[type="date"] { 
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 6px;
+    font-size: 1em;
+    background-color: var(--input-background-color);
+    color: var(--input-text-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-grupo input:focus {
+    outline: none; /* Remove o outline padrão do navegador */
+    border-color: var(--secondary-color); /* Borda azul ao focar */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra de foco suave */
+}
+
+.bt-adicionar {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    background-color: var(--primary-color);
+    color: var(--button-active-text);
+    border: none;
+    border-radius: 6px;
+    font-size: 1.15em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, filter 0.2s ease, transform 0.1s ease;
+    letter-spacing: 0.5px; /* Espaçamento sutil entre letras */
+}
+
+.bt-adicionar:hover {
+    filter: brightness(var(--button-hover-brightness));
+    /* Quando o mouse passa sobre o botão, ele fica ligeiramente mais brilhante. */
+    transform: translateY(-2px); /* Efeito sutil de levantar */
+}
+.bt-adicionar:active {
+    transform: translateY(0); /* Volta ao normal ao clicar */
+}
+
+/* Os cards dentro de .right-column-cards vão ocupar 100% da largura do seu pai */
+.right-column-cards .card {
+    width: 100%;
+}
+
+#lista-gastos-dividir li,
+#lista-gastos-pessoais li {
+    /* Seus estilos existentes para li vão aqui */
+    background-color: var(--card-background-color);
+    margin-bottom: 10px;
+    padding: 18px 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--card-border-color);
+    font-size: 0.98em;
+    color: var(--text-color);
+    list-style: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Sombra sutil para itens da lista */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    word-wrap: break-word; /* Força a quebra de palavras longas */
+    overflow-wrap: break-word; /* Outra propriedade para compatibilidade */
+}
+#lista-gastos-dividir li:hover,
+#lista-gastos-pessoais li:hover {
+    transform: translateY(-2px); /* Efeito sutil de levantar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para esconder elementos */
+.oculta {
+    display: none !important;
+}
+
+.bt-dividir,
+.bt-excluir {
+    padding: 8px 14px; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.88em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease
+}
+.bt-dividir {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.bt-dividir:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.bt-excluir {
+    background-color: var(--danger-color); /* Vermelho para excluir */
+    color: white;
+}
+
+.bt-excluir:hover {
+    background-color: #c82333; /* Vermelho mais escuro no hover */
+    transform: translateY(-1px);
+}
+
+.gasto-dividir {
+    background-color: var(--success-light-bg);
+    border-left: 6px solid var(--success-border);
+    padding-left: 14px;
+}
+.gasto-dividir .bt-dividir {
+    background-color: #6c757d; /* Cinza para o botão "Não dividir" */
+}
+.gasto-dividir .bt-dividir:hover {
+    background-color: #5a6268;
+}
+
+#lista-gastos-dividir li span:first-child, /* Descrição */
+#lista-gastos-pessoais li span:first-child {
+    font-weight: 600; /* Descrição mais encorpada */
+    color: var(--header-text-color);
+    flex-basis: 10%; /* Dá uma base maior para a descrição */
+}
+#lista-gastos-dividir li span:nth-child(2), /* Valor */
+#lista-gastos-pessoais li span:nth-child(2) {
+    font-weight: 600;
+    color: var(--primary-color); 
+    flex-basis: 10%;
+    flex-shrink: 0;
+}
+
+#lista-gastos-dividir li span:nth-child(3), /* Data */
+#lista-gastos-pessoais li span:nth-child(3) {
+    font-size: 0.85em;
+    color: var(--secondary-text-color);
+    flex-basis: 15%;
+    flex-shrink: 0;
+}
+
+/* Ajustes para scrollbar (opcional, mas melhora o visual) */
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--card-background-color);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--input-border-color);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary-text-color);
+}
+
+.acoes-gasto {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0; /* Garante que o contêiner de ações não encolha */
+}
+
+.total-categoria {
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: var(--subtle-border);
+    /* Uma linha para separar o total da lista */
+    font-weight: 900;
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between; /* Espaço entre o label e o valor */
+    align-items: center;
+}
+
+.total-categoria span {
+    color: var(--primary-color);
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+/* Classe de utilidade para margem superior */
+.mt-15 {
+    margin-top: 15px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column; /* Empilha as colunas verticalmente */
+        align-items: center;
+    }
+    .left-column-cards,
+    .right-column-cards {
+        max-width: 100%; /* Ocupa a largura total */
+        width: 100%; /* Garante 100% em telas menores */
+    }
+}

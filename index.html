@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanças Simples</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1>Finanças Simples</h1>
+        <div class="temas">
+            <button id="bt-tema-claro" class="bt-tema active" data-theme="claro">Claro</button>
+            <button id="bt-tema-escuro" class="bt-tema" data-theme="escuro">Escuro</button>
+            <button id="bt-tema-azul" class="bt-tema" data-theme="azul">Azul</button>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <div class="left-column-cards">
+            <section class="section-add-gasto card">
+                <h2>Adicionar Novo Gasto</h2>
+                <form id="form-add-gasto">
+                    <div class="form-grupo">
+                        <label for="descricao">Descrição:</label>
+                        <input type="text" id="descricao" required>
+
+                        </div>
+                    <div class="form-grupo">
+                        <label for="valor">Valor:</label>
+                        <input type="number" id="valor" step="0.01" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="data">Data:</label>
+                        <input type="date" id="data" required>
+                    </div>
+
+                    <button type="submit" class="bt-adicionar">Adicionar Gasto</button>
+                </form>
+
+            </section>
+
+            <section class="section-resumo card">
+                <h2>Resumo do Mês</h2>
+                <p>Total de gastos geral: <span id="total-de-gastos">R$ 0.00</span></p>
+
+                <hr class="separator">
+
+                <div class="form-grupo">
+                    <label for="anotacoes">Anotações do Mês</label>
+                    <textarea class="campo-anotacoes" id="anotacoes" rows="5"></textarea>
+                </div>
+            </section>
+        </div>
+
+        <div class="right-column-cards">
+            <section class="card section-gastos-dividir">
+                <h2>Gastos Compartilhados (a Dividir)</h2>
+                <div class="form-grupo">
+                    <label for="split-by">Dividir por (pessoas):</label>
+                    <input type="number" id="split-by" min="1" value="1">
+                    <button id="bt-aplicar-divisao" class="bt-adicionar" style="margin-top: 10px;">Aplicar
+                        Divisão</button>
+
+                    </div>
+                <ul id="lista-gastos-dividir"></ul>
+                <p class="total-categoria">Total Gastos Compartilhados: <span id="total-gastos-dividir">R$ 0.00</span>
+                </p>
+                <p id="sua-parte" class="oculta">Sua parte do total a dividir: <span id="total-da-sua-parte">R$
+                        0.00</span></p>
+                </section>
+
+            <section class="card section-gastos-pessoais">
+                <h2>Meus Gastos Pessoais</h2>
+                <ul id="lista-gastos-pessoais"></ul>
+                <p class="total-categoria">Total Gastos Pessoais: <span id="total-gastos-pessoais">R$ 0.00</span></p>
+            </section>
+        </div>
+
+    </main>
+
+    <script src="./theme.js" defer></script>
+    <script src="./gastos.js" defer></script>
+    <script src="./notas.js" defer></script>
+</body>
+
+</html>
