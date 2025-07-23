@@ -601,7 +601,7 @@ html.azul {
     /* Contêiner para Descrição, Valor e Data na mesma linha */
     .gasto-info-linha {
         display: flex;
-        /* Transforma em flex para alinhar lado a lado */
+        justify-content: space-between;
         flex-wrap: wrap;
         /* Permite quebrar se o texto for muito longo */
         width: 100%;
@@ -612,46 +612,21 @@ html.azul {
         gap: 5px;
         /* Espaço entre Descrição, Valor e Data no mobile */
     }
-
-    #lista-gastos-dividir li span:first-child,
-    /* Descrição */
-    #lista-gastos-pessoais li span:first-child {
-        font-weight: 600;
-        color: var(--header-text-color);
-        flex-basis: auto;
-        /* Deixa o flexbox decidir a largura */
-        flex-grow: 1;
-        /* Permite que a descrição cresça */
-        margin-right: 5px;
-        /* Pequeno espaço entre descrição e valor */
-    }
-
-    #lista-gastos-dividir li span:nth-child(2),
-    /* Valor */
-    #lista-gastos-pessoais li span:nth-child(2) {
+    /* Ajuste para os elementos individuais dentro de .gasto-info-linha */
+    .gasto-info-linha span:first-child { /* Descrição */
+        font-size: 1.1em;
         font-weight: 700;
-        color: var(--primary-color);
-        flex-basis: auto;
-        /* Deixa o flexbox decidir a largura */
-        flex-shrink: 0;
-        /* Impede o valor de encolher muito */
-        text-align: right;
-        /* Garante alinhamento à direita */
-        margin-right: 5px;
-        /* Pequeno espaço entre valor e data */
+        flex-grow: 0; /* Permite que a descrição cresça */
     }
 
-    #lista-gastos-dividir li span:nth-child(3),
-    /* Data */
-    #lista-gastos-pessoais li span:nth-child(3) {
-        font-size: 0.8em;
-        color: var(--secondary-text-color);
-        flex-basis: auto;
-        /* Deixa o flexbox decidir a largura */
-        flex-shrink: 0;
-        /* Impede a data de encolher muito */
-        text-align: right;
-        /* Alinha a data à direita */
+    .gasto-info-linha span:nth-child(2) { /* Valor */
+        font-size: 1.2em;
+        flex-shrink: 0; /* Impede o valor de encolher */
+    }
+
+    .gasto-info-linha span:nth-child(3) { /* Data */
+        font-weight: 500;
+        flex-shrink: 0; /* Impede a data de encolher */
     }
 
     /* Ações (botões) em uma linha separada e centralizados */
