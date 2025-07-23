@@ -532,8 +532,8 @@ html.azul {
     margin-top: 15px;
 }
 
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
+/* Media query para telas menores (smartphones) */
+@media (max-width: 576px) {
     .main {
         flex-direction: column;
         /* Empilha as colunas verticalmente */
@@ -547,10 +547,6 @@ html.azul {
         width: 100%;
         /* Garante 100% em telas menores */
     }
-}
-
-/* Media query para telas menores (smartphones) */
-@media (max-width: 576px) {
     body {
         padding: 10px;
     }
@@ -615,7 +611,7 @@ html.azul {
     .gasto-info-linha span:first-child { /* Descrição */
         font-size: 1.1em;
         font-weight: 700;
-        flex-grow: 1; /* PERMITE QUE A DESCRIÇÃO CRESÇA E OCUPE O ESPAÇO RESTANTE */
+        flex-grow: 0;
         flex-shrink: 1; /* Permite que encolha um pouco se necessário */
         flex-basis: auto; /* Deixa o elemento decidir sua largura inicial com base no conteúdo */
         white-space: normal; /* Garante que o texto quebre normalmente */

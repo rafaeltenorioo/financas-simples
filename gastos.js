@@ -87,41 +87,67 @@ function adicionarGasto(e) {
 formAddGasto.addEventListener('submit', adicionarGasto);
 
 function renderizarGasto(gasto) {
-    //Pega um objeto de gasto e cria dinamicamente um elemento <li> HTML que representa esse gasto na lista visual.
-
+    // Pega um objeto de gasto e cria dinamicamente um elemento <li> HTML que representa esse gasto na lista visual.
     const li = document.createElement('li');
-
-    li.dataset.id = gasto.id; //Adiciona um atributo personalizado data-id ao elemento <li> no HTML, cujo valor é o id único do gasto. Quando o HTML é gerado, fica assim: <li data-id="1700000000000">...</li>
+    li.dataset.id = gasto.id; // Adiciona um atributo personalizado data-id ao elemento <li> no HTML.
 
     if (gasto.dividirConta) {
-        li.classList.add('gasto-dividir')
+        li.classList.add('gasto-dividir');
     }
 
-    li.innerHTML = `
-        <span>${gasto.descricao}</span>
-        <span>${formatarMoeda(gasto.valor)}</span>
-        <span>${new Date(gasto.data + 'T00:00:00').toLocaleDateString('pt-BR')}</span>
-        <div class = "acoes-gasto">
-            <button class = "bt-dividir">${gasto.dividirConta ? 'Não dividir' : 'Dividir'}</button>
-            <button class = "bt-excluir">Excluir</button>
-        </div>
-            
-    `;
+    // NOVO: Criar o contêiner para Descrição, Valor e Data
+    const gastoInfoDiv = document.createElement('div');
+    gastoInfoDiv.classList.add('gasto-info-linha'); // Adiciona a classe CSS 'gasto-info-linha'
 
+    // Criar e adicionar o span da descrição
+    const descricaoSpan = document.createElement('span');
+    descricaoSpan.textContent = gasto.descricao;
+    gastoInfoDiv.appendChild(descricaoSpan);
+
+    // Criar e adicionar o span do valor (formatado como moeda)
+    const valorSpan = document.createElement('span');
+    valorSpan.textContent = `R$ ${gasto.valor.toFixed(2).replace('.', ',')}`; // Usa toFixed(2) para 2 casas decimais e substitui ponto por vírgula
+    gastoInfoDiv.appendChild(valorSpan);
+
+    // Criar e adicionar o span da data
+    const dataSpan = document.createElement('span');
+    // Assegura que a data seja interpretada corretamente, adicionando 'T00:00:00' para evitar problemas de fuso horário em algumas interpretações de data.
+    dataSpan.textContent = new Date(gasto.data + 'T00:00:00').toLocaleDateString('pt-BR');
+    gastoInfoDiv.appendChild(dataSpan);
+
+    // Adiciona o novo contêiner 'gastoInfoDiv' ao 'li' principal
+    li.appendChild(gastoInfoDiv);
+
+
+    // Criar o contêiner para os botões de ação
+    const acoesDiv = document.createElement('div');
+    acoesDiv.classList.add('acoes-gasto');
+
+    // Criar e adicionar o botão de Dividir
+    const btDividir = document.createElement('button');
+    btDividir.textContent = gasto.dividirConta ? 'Não Dividir' : 'Dividir';
+    btDividir.classList.add('bt-dividir');
+    // Adiciona o event listener para alternar a divisão do gasto
+    btDividir.addEventListener('click', () => toggleDivisaoGasto(gasto.id));
+    acoesDiv.appendChild(btDividir);
+
+    // Criar e adicionar o botão de Excluir
+    const btExcluir = document.createElement('button');
+    btExcluir.textContent = 'Excluir';
+    btExcluir.classList.add('bt-excluir');
+    // Adiciona o event listener para excluir o gasto
+    btExcluir.addEventListener('click', () => excluirGasto(gasto.id));
+    acoesDiv.appendChild(btExcluir);
+
+    // Adiciona o contêiner de ações ao 'li' principal
+    li.appendChild(acoesDiv);
+
+    // Adiciona o <li> à lista correta (pessoal ou a dividir)
     if (gasto.dividirConta) {
         listaGastosDividirUl.appendChild(li);
     } else {
         listaGastosPessoaisUl.appendChild(li);
     }
-
-    li.querySelector('.bt-excluir').addEventListener('click', () => {
-        excluirGasto(gasto.id) // Chama a função de exclusão passando o ID do gasto
-    })
-
-    li.querySelector('.bt-dividir').addEventListener('click', () => {
-        toggleDivisaoGasto(gasto.id);
-    })
-    //É crucial que o event listener para o botão "Excluir" seja adicionado imediatamente após o <li> ser criado e adicionado ao DOM. Se você tentar adicionar um event listener a todos os .bt-excluir uma única vez no início do script, ele não funcionará para os botões que são criados dinamicamente depois. Ao fazer isso dentro de renderizarGasto, garantimos que cada botão "Excluir" novo tenha seu ouvinte.
 }
 
 function toggleDivisaoGasto(id) {
@@ -191,13 +217,14 @@ function aplicarDivisao() {
     if (totalGastosParaDividir === 0) {
         suaParteParagrafo.classList.add('oculta');
         totalDaSuaParteSpan.textContent = formatarMoeda(0);
-        splitByInput.value = 1;
+        if (splitByInput.value === '' || numPessoas === 0) {
+            splitByInput.value = 1;
+        }
         return;
     }
 
     if (isNaN(numPessoas) || numPessoas < 1) {
         // Definimos um valor padrão e ocultamos a parte da divisão
-        splitByInput.value = 1;
         suaParteParagrafo.classList.add('oculta');
         return;
     }
