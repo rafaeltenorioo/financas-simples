@@ -1,0 +1,101 @@
+html {
+  --primary-color: #28a745;
+  /* Verde corporativo - para acentos e sucesso */
+  --secondary-color: #007bff;
+  /* Azul para botões e interatividade */
+  --background-color: #f8f9fa;
+  /* Branco/cinza muito claro para o fundo geral */
+  --text-color: #343a40;
+  /* Cinza escuro para texto principal */
+  --header-text-color: #212529;
+  /* Preto para títulos maiores */
+  --card-background-color: #ffffff;
+  /* Branco puro para o fundo dos cards */
+  --card-border-color: #e9ecef;
+  /* Cinza claro para bordas de card */
+  --input-background-color: #ffffff;
+  --input-border-color: #ced4da;
+  --input-text-color: #495057;
+  --button-default-bg: #6c757d;
+  /* Cinza para botões secundários */
+  --button-default-text: #ffffff;
+  --button-default-hover-bg: #5a6268;
+  --button-active-bg: var(--secondary-color);
+  /* Azul para botões ativos/principais */
+  --button-active-text: #ffffff;
+  --button-hover-brightness: 110%;
+  /* Brilho para hover em botões */
+  --danger-color: #dc3545;
+  /* Vermelho para ações perigosas */
+  --success-light-bg: #d4edda;
+  /* Fundo verde claro para item de gasto dividível */
+  --success-border: #28a745;
+  /* Borda verde para item de gasto dividível */
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* Sombra mais elegante */
+  --subtle-border: 1px dashed #dee2e6;
+  /* Linha divisória sutil */
+}
+
+html.escuro {
+  --primary-color: #2fb35e;
+  /* Verde um pouco mais claro para escuro */
+  --secondary-color: #0099ff;
+  /* Azul um pouco mais claro para escuro */
+  --background-color: #212529;
+  /* Preto/cinza muito escuro para o fundo geral */
+  --text-color: #e9ecef;
+  /* Cinza claro para texto principal */
+  --header-text-color: #ffffff;
+  /* Branco para títulos maiores */
+  --card-background-color: #343a40;
+  /* Cinza escuro para o fundo dos cards */
+  --card-border-color: #495057;
+  /* Cinza mais escuro para bordas de card */
+  --input-background-color: #495057;
+  --input-border-color: #6c757d;
+  --input-text-color: #e9ecef;
+  --button-default-bg: #8c97a2;
+  /* Cinza mais claro para escuro */
+  --button-default-text: #212529;
+  --button-default-hover-bg: #7b858e;
+  --button-active-bg: var(--secondary-color);
+  --button-active-text: #ffffff;
+  --danger-color: #ff6b7a;
+  /* Vermelho mais suave para escuro */
+  --success-light-bg: #3d5c41;
+  --success-border: #2fb35e;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --subtle-border: 1px dashed #495057;
+}
+
+html.azul {
+  --primary-color: #0d47a1;
+  /* Azul escuro principal */
+  --secondary-color: #1976d2;
+  /* Azul médio para acentos */
+  --background-color: #e3f2fd;
+  /* Azul muito claro para fundo geral */
+  --text-color: #263238;
+  /* Cinza escuro azulado */
+  --header-text-color: #0d47a1;
+  /* Azul escuro para títulos */
+  --card-background-color: #ffffff;
+  --card-border-color: #bbdefb;
+  --input-background-color: #ffffff;
+  --input-border-color: #90caf9;
+  --input-text-color: #212121;
+  --button-default-bg: #42a5f5;
+  /* Azul médio para botões secundários */
+  --button-default-text: #ffffff;
+  --button-default-hover-bg: #3c9cdc;
+  --button-active-bg: var(--primary-color);
+  --button-active-text: #ffffff;
+  --danger-color: #ef5350;
+  /* Vermelho para ações perigosas */
+  --success-light-bg: #e8f5e9;
+  /* Verde para gastável */
+  --success-border: #4caf50;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --subtle-border: 1px dashed #c1d6e8;
+}

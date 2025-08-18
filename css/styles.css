@@ -1,0 +1,260 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.main {
+  display: flex;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 80px auto 0 5px;
+  align-items: flex-start;
+}
+
+.card {
+  background-color: var(--card-background-color);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--card-border-color);
+  /* flex-basis: 5000px; */
+  /* flex-grow: 1; */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-add {
+  flex-basis: 280px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 100px;
+  gap: 10px;
+}
+
+.cards-center-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  flex-grow: 1;
+}
+
+.separator {
+  border: none;
+  border-top: var(--subtle-border);
+  margin: 25px 0;
+}
+
+/* Títulos */
+h1 {
+  text-align: center;
+  color: var(--header-text-color);
+  font-size: 2.8em;
+  font-weight: 700;
+}
+
+h2 {
+  color: var(--header-text-color);
+  margin-bottom: 20px;
+  font-size: 1.9em;
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 12px;
+}
+
+/* Formulários */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group__label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.form-group__input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 6px;
+  font-size: 1em;
+  background-color: var(--input-background-color);
+  color: var(--input-text-color);
+}
+
+.form-group--inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-group__input--inline {
+  max-width: 80px;
+}
+
+/* Botões genéricos */
+.bt-add,
+.bt-split {
+  border: none;
+  border-radius: 6px;
+  font-size: 1.15em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bt-add {
+  display: block;
+  padding: 15px;
+  width: 100%;
+  background-color: var(--primary-color);
+  color: var(--button-active-text);
+}
+
+.bt-split {
+  padding: 11px 20px;
+  background-color: var(--secondary-color);
+  color: var(--button-active-text);
+}
+
+/* Lista de gastos */
+.card-personal__total,
+.card-shared__total,
+.oculta {
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.gasto-list__item {
+  background-color: var(--card-background-color);
+  margin-bottom: 8px;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  /* Novo: Adiciona um espaçamento entre os elementos */
+  gap: 20px;
+  align-items: center;
+  border: 1px solid var(--card-border-color);
+  font-size: 0.98em;
+  color: var(--text-color);
+  list-style: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.gasto-list__info {
+  /* Permite que este contêiner cresça para ocupar todo o espaço disponível */
+  flex-grow: 1;
+  /* Novo: Garante que o conteúdo não seja esmagado pelo botão */
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.gasto-list__description {
+  font-weight: 600;
+  font-size: 1.2em;
+  color: var(--header-text-color);
+}
+
+.gasto-list__value-date {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  font-size: 0.95em;
+  color: var(--text-color);
+}
+
+.gasto-list__value {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.gasto-list__date {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+}
+
+.gasto-list__actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  /* Impede que o contêiner de botões encolha, mantendo o espaçamento */
+  flex-shrink: 0;
+}
+
+.gasto-list__button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.88em;
+  font-weight: 500;
+}
+
+.gasto-list__button--divide {
+  background-color: var(--secondary-color);
+  color: white;
+  white-space: nowrap; /* Impede que o texto "Não Dividir" quebre a linha */
+}
+
+.gasto-list__button--divide:hover {
+  background-color: #0056b3;
+}
+
+.gasto-list__button--delete {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.gasto-list__button--delete:hover {
+  background-color: #c82333;
+}
+
+.gasto-list__item--divided {
+  background-color: var(--success-light-bg);
+  border-left: 6px solid var(--success-border);
+  padding-left: 14px;
+}
+
+.gasto-list__item--divided .gasto-list__button--divide {
+  background-color: #6c757d;
+}
+
+.gasto-list__item--divided .gasto-list__button--divide:hover {
+  background-color: #5a6268;
+}
+
+/* Totais */
+.total-category {
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: var(--subtle-border);
+  font-weight: 900;
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Empurra o elemento para a parte inferior do contêiner flexbox */
+  margin-top: auto;
+}
+
+.total-category span {
+  color: var(--primary-color);
+  font-size: 1.3em;
+  font-weight: 700;
+}

@@ -1,0 +1,53 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: var(--card-background-color);
+  box-shadow: var(--box-shadow);
+  border-bottom: 1px solid var(--card-border-color);
+}
+
+.header__title {
+  margin: 0;
+  font-size: 1.8em;
+  text-align: left;
+}
+
+.theme-switcher {
+  display: flex;
+  gap: 12px;
+}
+
+.theme-switcher__button {
+  padding: 8px 16px;
+  border: 1px solid var(--input-border-color);
+  border-radius: 6px;
+  background-color: var(--button-default-bg);
+  color: var(--button-default-text);
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.theme-switcher__button:hover {
+  background-color: var(--button-default-hover-bg);
+  transform: translateY(-1px);
+}
+
+.theme-switcher__button.active {
+  background-color: var(--button-active-bg);
+  color: var(--button-active-text);
+  border-color: var(--button-active-bg);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+  transform: translateY(-1px);
+}

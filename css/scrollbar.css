@@ -1,0 +1,28 @@
+.gasto-list--scrollable {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 10px; /* Garante que a barra de rolagem não esconda o conteúdo */
+}
+
+/* Opcional: Estilo para a barra de rolagem em navegadores WebKit */
+.gasto-list--scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.gasto-list--scrollable::-webkit-scrollbar-track {
+  background: var(
+    --input-background-color
+  ); /* Fundo da barra de rolagem mais claro */
+  border-radius: 10px;
+}
+
+.gasto-list--scrollable::-webkit-scrollbar-thumb {
+  background: var(
+    --primary-color
+  ); /* Cor do tema principal para o "pegador" da barra */
+  border-radius: 10px;
+}
+
+.gasto-list--scrollable::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color); /* Uma cor secundária ao passar o mouse */
+}

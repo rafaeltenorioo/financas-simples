@@ -1,90 +1,127 @@
 <!DOCTYPE html>
 <html lang="pt-br" class="html">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finanças Simples</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/theme.css" />
+    <link rel="stylesheet" href="./css/responsive.css" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/scrollbar.css" />
+    <link rel="stylesheet" href="./css/notas.css" />
+  </head>
 
-<body>
+  <body>
     <header class="header">
-        <h1>Finanças Simples</h1>
-        <div class="temas">
-            <button id="bt-tema-claro" class="bt-tema active" data-theme="claro">Claro</button>
-            <button id="bt-tema-escuro" class="bt-tema" data-theme="escuro">Escuro</button>
-            <button id="bt-tema-azul" class="bt-tema" data-theme="azul">Azul</button>
-        </div>
+      <h1 class="header__title">Finanças Simples</h1>
+      <div class="theme-switcher">
+        <button
+          id="bt-tema-claro"
+          class="theme-switcher__button"
+          data-theme="claro"
+        >
+          Claro
+        </button>
+        <button
+          id="bt-tema-escuro"
+          class="theme-switcher__button"
+          data-theme="escuro"
+        >
+          Escuro
+        </button>
+        <button
+          id="bt-tema-azul"
+          class="theme-switcher__button"
+          data-theme="azul"
+        >
+          Azul
+        </button>
+      </div>
     </header>
 
     <main class="main">
+      <section class="card-add card">
+        <h2 class="card-add__title">Adicionar Gasto</h2>
+        <form id="form-add-gasto" class="card-add__form">
+          <div class="form-group">
+            <label for="descricao" class="form-group__label">Descrição:</label>
+            <input
+              type="text"
+              id="descricao"
+              class="form-group__input"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="valor" class="form-group__label">Valor:</label>
+            <input
+              type="number"
+              id="valor"
+              class="form-group__input"
+              step="0.01"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="data" class="form-group__label">Data:</label>
+            <input type="date" id="data" class="form-group__input" />
+          </div>
+          <button type="submit" class="bt-add">Adicionar Gasto</button>
+        </form>
 
-        <div class="left-column-cards">
-            <section class="section-add-gasto card">
-                <h2>Adicionar Novo Gasto</h2>
-                <form id="form-add-gasto">
-                    <div class="form-grupo">
-                        <label for="descricao">Descrição:</label>
-                        <input type="text" id="descricao" required>
-
-                        </div>
-                    <div class="form-grupo">
-                        <label for="valor">Valor:</label>
-                        <input type="number" id="valor" step="0.01" required>
-                    </div>
-                    <div class="form-grupo">
-                        <label for="data">Data:</label>
-                        <input type="date" id="data" required>
-                    </div>
-
-                    <button type="submit" class="bt-adicionar">Adicionar Gasto</button>
-                </form>
-
-            </section>
-
-            <section class="section-resumo card">
-                <h2>Resumo do Mês</h2>
-                <p>Total de gastos geral: <span id="total-de-gastos">R$ 0.00</span></p>
-
-                <hr class="separator">
-
-                <div class="form-grupo">
-                    <label for="anotacoes">Anotações do Mês</label>
-                    <textarea class="campo-anotacoes" id="anotacoes" rows="5"></textarea>
-                </div>
-            </section>
+        <div class="form-group">
+          <label for="anotacoes" class="form-group__label"
+            >Anotações do Mês</label
+          >
+          <textarea class="notes-field" id="anotacoes" rows="5"></textarea>
         </div>
+      </section>
 
-        <div class="right-column-cards">
-            <section class="card section-gastos-dividir">
-                <h2>Gastos Compartilhados (a Dividir)</h2>
-                <div class="form-grupo">
-                    <label for="split-by">Dividir por (pessoas):</label>
-                    <input type="number" id="split-by" min="1" value="1">
-                    <button id="bt-aplicar-divisao" class="bt-adicionar" style="margin-top: 10px;">Aplicar
-                        Divisão</button>
+      <div class="cards-center-container">
+        <section class="card card-personal">
+          <h2 class="card-personal__title">Gastos Pessoais</h2>
+          <ul id="lista-gastos-pessoais" class="card-personal__list"></ul>
+          <p class="card-personal__total">
+            Total Pessoal:
+            <span id="total-gastos-pessoais" class="card-personal__total-value"
+              >R$ 0.00</span
+            >
+          </p>
+        </section>
 
-                    </div>
-                <ul id="lista-gastos-dividir"></ul>
-                <p class="total-categoria">Total Gastos Compartilhados: <span id="total-gastos-dividir">R$ 0.00</span>
-                </p>
-                <p id="sua-parte" class="oculta">Sua parte do total a dividir: <span id="total-da-sua-parte">R$
-                        0.00</span></p>
-                </section>
-
-            <section class="card section-gastos-pessoais">
-                <h2>Meus Gastos Pessoais</h2>
-                <ul id="lista-gastos-pessoais"></ul>
-                <p class="total-categoria">Total Gastos Pessoais: <span id="total-gastos-pessoais">R$ 0.00</span></p>
-            </section>
-        </div>
-
+        <section class="card card-shared">
+          <h2 class="card-shared__title">Gastos Compartilhados</h2>
+          <div class="form-group form-group--inline">
+            <label for="split-by" class="form-group__label">Dividir por:</label>
+            <input
+              type="number"
+              id="split-by"
+              class="form-group__input form-group__input--inline"
+              min="1"
+              value="1"
+            />
+            <button id="bt-aplicar-divisao" class="bt-split">Aplicar</button>
+          </div>
+          <ul id="lista-gastos-dividir" class="card-shared__list"></ul>
+          <p class="card-shared__total">
+            Total Compartilhado:
+            <span id="total-gastos-dividir" class="card-shared__total-value"
+              >R$ 0.00</span
+            >
+          </p>
+          <p id="sua-parte" class="oculta card-shared__split">
+            Sua parte:
+            <span id="total-da-sua-parte" class="card-shared__split-value"
+              >R$ 0.00</span
+            >
+          </p>
+        </section>
+      </div>
     </main>
 
-    <script src="./theme.js" defer></script>
-    <script src="./gastos.js" defer></script>
-    <script src="./notas.js" defer></script>
-</body>
-
+    <script type="module" src="./js/theme.js"></script>
+    <script type="module" src="./js/notas.js"></script>
+    <script type="module" src="./js/main.js"></script>
+  </body>
 </html>
